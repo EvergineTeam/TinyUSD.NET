@@ -19,10 +19,6 @@ namespace TinyUSDGen
 
         public void Generate(CppCompilation compilation, string outputPath)
         {
-            ////Helpers.TypedefList = compilation.Typedefs
-            ////        .Where(t => t.TypeKind == CppTypeKind.Typedef)
-            ////        .ToDictionary(t => t.Name, t => (t.ElementType as CppAst.CppTypedef)?.Name);
-
             GenerateEnums(compilation, outputPath);
             GenerateStructs(compilation, outputPath);
             GenerateDelegates(compilation, outputPath);
