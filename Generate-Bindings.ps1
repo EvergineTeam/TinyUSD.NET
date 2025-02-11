@@ -42,7 +42,7 @@ else
 
 # Run generator
 LogDebug "START binding generator process"
-pushd .\TinyUSDGen\TinyUSDGen\bin\Release\net8.0\
+pushd .\TinyUSDGen\TinyUSDGen\bin\Release\net8.0\win-x64\
 .\publish\TinyUSDGen.exe
 if($?)
 {
