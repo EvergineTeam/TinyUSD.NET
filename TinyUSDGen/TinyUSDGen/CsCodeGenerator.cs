@@ -164,7 +164,12 @@ namespace TinyUSDGen
         private void GenerateFuntions(CppCompilation compilation, string outputPath)
         {
             Debug.WriteLine("Generating Functions...");
-            
+
+            var functionsWithoutDuplicates = compilation.Functions
+                .GroupBy(f => (f.Name, f.Parameters.Count))
+                .Select(g => g.First())
+                .ToList();
+
             using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Funtions.cs")))
             {
                 file.WriteLine("using System;");
@@ -174,7 +179,7 @@ namespace TinyUSDGen
                 file.WriteLine($"\tpublic static unsafe partial class TinyUSDNative");
                 file.WriteLine("\t{");
 
-                foreach (var cppFunction in compilation.Functions)
+                foreach (var cppFunction in functionsWithoutDuplicates)
                 {
                     Helpers.PrintComments(file, cppFunction.Comment, "\t\t");
                     file.WriteLine($"\t\t[DllImport(\"c-tinyusd\", CallingConvention = CallingConvention.Cdecl)]");
