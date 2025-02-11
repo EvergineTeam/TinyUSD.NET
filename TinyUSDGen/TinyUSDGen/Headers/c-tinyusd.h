@@ -726,14 +726,14 @@ typedef struct CTinyUSDPrim CTinyUSDPrim;
    fills `err` with error message.
    (App need to free `err` after using it.)
  */
-CTinyUSDPrim *c_tinyusd_prim_new(const char *prim_type,
+C_TINYUSD_EXPORT CTinyUSDPrim *c_tinyusd_prim_new(const char *prim_type,
                                  c_tinyusd_string_t *err);
 
 /* Create Prim with builtin Prim type.
    Returns nullptr when invalid `prim_type` enum value is provided.
  */
 
-CTinyUSDPrim *c_tinyusd_prim_new_builtin(CTinyUSDPrimType prim_type);
+C_TINYUSD_EXPORT CTinyUSDPrim *c_tinyusd_prim_new_builtin(CTinyUSDPrimType prim_type);
 
 C_TINYUSD_EXPORT int c_tinyusd_prim_to_string(const CTinyUSDPrim *prim,
                                               c_tinyusd_string_t *str);
