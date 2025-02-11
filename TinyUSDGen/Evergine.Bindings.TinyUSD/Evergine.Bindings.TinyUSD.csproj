@@ -2,13 +2,28 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+	  <Copyright>Copyright (c) Evergine 2025</Copyright>
+	  <Authors>Evergine Team</Authors>
+	  <Company>Plain Concepts</Company>
+	  <Description>Provides csharp bindings to tinyUSD library.</Description>
+	  <RepositoryUrl>https://github.com/EvergineTeam/ImGui.Net</RepositoryUrl>
+	  <PackageIcon>icon.png</PackageIcon>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <Platforms>AnyCPU;x86;x64</Platforms>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="Generated\" />
   </ItemGroup>
+
+	<ItemGroup>
+		<Content Include="runtimes\**" PackagePath="runtimes" Visible="true" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\..\icon.png" Pack="true" PackagePath="\" Visible="false" />
+		<None Include="..\..\README.md" Pack="true" PackagePath="\" Visible="false" />
+	</ItemGroup>
 
 </Project>
