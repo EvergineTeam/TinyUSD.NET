@@ -11,6 +11,7 @@ namespace TinyUSDGen
     public static class Helpers
     {
         public static List<string> NondefineStructs = new();
+        public static List<string> Delegates = new();
 
         private static readonly Dictionary<string, string> s_csNameMappings = new Dictionary<string, string>()
         {
@@ -54,6 +55,12 @@ namespace TinyUSDGen
             {
                 var originalName = typedef.Name;
                 s_csNameMappings.TryGetValue(originalName, out string typeDefCsName);
+
+                if (typeDefCsName == null && Delegates.Contains(originalName))
+                {
+                    typeDefCsName = originalName;
+                }
+
                 if (isPointer)
                     return typeDefCsName + "*";
 
@@ -185,6 +192,7 @@ namespace TinyUSDGen
                     result = "bool";
                     break;
                 case CppPrimitiveKind.Char:
+                case CppPrimitiveKind.WChar:
                     result = "char";
                     break;
                 case CppPrimitiveKind.Short:
@@ -209,7 +217,6 @@ namespace TinyUSDGen
                 case CppPrimitiveKind.LongLong:
                 case CppPrimitiveKind.UnsignedLongLong:
                 case CppPrimitiveKind.LongDouble:
-                case CppPrimitiveKind.WChar:
                 default:
                     break;
             }

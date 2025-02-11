@@ -64,6 +64,13 @@ namespace TinyUSDGen
 
             Helpers.NondefineStructs = compilation.Classes.Where(c => c.ClassKind == CppClassKind.Struct && c.IsDefinition == false).Select(c => c.Name).ToList();
 
+            Helpers.Delegates = compilation.Typedefs
+                .Where(t => t.TypeKind == CppTypeKind.Typedef
+                       && t.ElementType is CppPointerType
+                       && ((CppPointerType)t.ElementType).ElementType.TypeKind == CppTypeKind.Function)
+                .Select(t => t.Name)
+                .ToList();
+
             var delegates = compilation.Typedefs
                 .Where(t => t.TypeKind == CppTypeKind.Typedef
                        && t.ElementType is CppPointerType
@@ -176,7 +183,7 @@ namespace TinyUSDGen
                     file.Write($"\t\tpublic static extern {returnType} {cppFunction.Name}(");
                     foreach (var parameter in cppFunction.Parameters)
                     {
-                        if(parameter != cppFunction.Parameters.First())
+                        if (parameter != cppFunction.Parameters.First())
                             file.Write(", ");
 
                         var convertedType = Helpers.ConvertToCSharpType(parameter.Type);
@@ -185,6 +192,7 @@ namespace TinyUSDGen
                     }
                     file.WriteLine(");\n");
                 }
+                file.WriteLine("\t}\n}");
             }
         }
     }

@@ -572,7 +572,7 @@ namespace Evergine.Bindings.TinyUSD
 		/// calling `c_tinyusd_string_free` after using it.
 		/// </summary>
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int c_tinyusd_stage_traverse(IntPtr stage,  callback_fun, IntPtr err);
+		public static extern int c_tinyusd_stage_traverse(IntPtr stage, CTinyUSDTraversalFunction callback_fun, IntPtr err);
 
 		/// <summary>
 		/// Detect file format of input file.
@@ -596,19 +596,19 @@ namespace Evergine.Bindings.TinyUSD
 		/// wide char version. especially for Windows UTF-16 filename.
 		/// </summary>
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern CTinyUSDFormat c_tinyusd_detect_format_w(* filename);
+		public static extern CTinyUSDFormat c_tinyusd_detect_format_w([MarshalAs(UnmanagedType.LPStr)] string filename);
 
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int c_tinyusd_is_usd_file_w(* filename);
+		public static extern int c_tinyusd_is_usd_file_w([MarshalAs(UnmanagedType.LPStr)] string filename);
 
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int c_tinyusd_is_usda_file_w(* filename);
+		public static extern int c_tinyusd_is_usda_file_w([MarshalAs(UnmanagedType.LPStr)] string filename);
 
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int c_tinyusd_is_usdc_file_w(* filename);
+		public static extern int c_tinyusd_is_usdc_file_w([MarshalAs(UnmanagedType.LPStr)] string filename);
 
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int c_tinyusd_is_usdz_file_w(* filename);
+		public static extern int c_tinyusd_is_usdz_file_w([MarshalAs(UnmanagedType.LPStr)] string filename);
 
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int c_tinyusd_is_usd_memory(byte* addr, UIntPtr nbytes);
@@ -641,16 +641,16 @@ namespace Evergine.Bindings.TinyUSD
 		/// wide char version. especially for Windows UTF-16 filename.
 		/// </summary>
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int c_tinyusd_load_usd_from_file_w(* filename, IntPtr stage, IntPtr warn, IntPtr err);
+		public static extern int c_tinyusd_load_usd_from_file_w([MarshalAs(UnmanagedType.LPStr)] string filename, IntPtr stage, IntPtr warn, IntPtr err);
 
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int c_tinyusd_load_usda_from_file_w(* filename, IntPtr stage, IntPtr warn, IntPtr err);
+		public static extern int c_tinyusd_load_usda_from_file_w([MarshalAs(UnmanagedType.LPStr)] string filename, IntPtr stage, IntPtr warn, IntPtr err);
 
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int c_tinyusd_load_usdc_from_file_w(* filename, IntPtr stage, IntPtr warn, IntPtr err);
+		public static extern int c_tinyusd_load_usdc_from_file_w([MarshalAs(UnmanagedType.LPStr)] string filename, IntPtr stage, IntPtr warn, IntPtr err);
 
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int c_tinyusd_load_usdz_from_file_w(* filename, IntPtr stage, IntPtr warn, IntPtr err);
+		public static extern int c_tinyusd_load_usdz_from_file_w([MarshalAs(UnmanagedType.LPStr)] string filename, IntPtr stage, IntPtr warn, IntPtr err);
 
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int c_tinyusd_load_usd_from_memory(byte* addr, UIntPtr nbytes, IntPtr warn, IntPtr err);
@@ -664,3 +664,5 @@ namespace Evergine.Bindings.TinyUSD
 		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
 		public static extern int c_tinyusd_load_usdz_from_memory(byte* addr, UIntPtr nbytes, IntPtr warn, IntPtr err);
 
+	}
+}
