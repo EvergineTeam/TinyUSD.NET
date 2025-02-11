@@ -229,14 +229,6 @@ namespace Evergine.Bindings.TinyUSD
 		public static extern int c_tinyusd_value_to_string(IntPtr val, IntPtr str);
 
 		/// <summary>
-		/// Free Value.
-		/// Internally calls `c_tinyusd_buffer_free` to free buffer associated with this
-		/// Value.
-		/// </summary>
-		[DllImport("c-tinyusd", CallingConvention = CallingConvention.Cdecl)]
-		public static extern int c_tinyusd_value_free(IntPtr val);
-
-		/// <summary>
 		/// New Value with token type.
 		/// NOTE: token data are copied. So it is safe to free token after calling this
 		/// function.
