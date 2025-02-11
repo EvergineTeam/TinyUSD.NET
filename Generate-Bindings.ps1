@@ -13,7 +13,7 @@
 param (
 	[string]$buildVerbosity = "normal",
 	[string]$buildConfiguration = "Release",
-	[string]tinyUSDGenCsprojPath = "TinyUSDGen\TinyUSDGen\TinyUSDGen.csproj"
+	[string]$tinyUSDGenCsprojPath = "TinyUSDGen\TinyUSDGen\TinyUSDGen.csproj"
 )
 
 # Utility functions
