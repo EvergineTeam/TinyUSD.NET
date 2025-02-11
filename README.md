@@ -7,7 +7,7 @@ tinyusdz is a lightweight, single-header C++ library for handling USD (Universal
 
 [![CI Imgui](https://github.com/EvergineTeam/ImGui.Net/actions/workflows/ci-imgui.yml/badge.svg)](https://github.com/EvergineTeam/ImGui.Net/actions/workflows/ci-imgui.yml)
 [![CD Imgui](https://github.com/EvergineTeam/ImGui.Net/actions/workflows/cd-imgui.yml/badge.svg)](https://github.com/EvergineTeam/ImGui.Net/actions/workflows/cd-imgui.yml)
-| tinyUSD.NET  | [![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.Imgui?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.Imgui) |
+[![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.Imgui?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.Imgui)
 
 ## How it works
 
