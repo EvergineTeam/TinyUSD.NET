@@ -165,6 +165,8 @@ namespace TinyUSDGen
         {
             Debug.WriteLine("Generating Functions...");
 
+            // Hack to avoid compilation errors with duplicate functions.
+            // Remove duplicates based on name and number of parameters.
             var functionsWithoutDuplicates = compilation.Functions
                 .GroupBy(f => (f.Name, f.Parameters.Count))
                 .Select(g => g.First())
