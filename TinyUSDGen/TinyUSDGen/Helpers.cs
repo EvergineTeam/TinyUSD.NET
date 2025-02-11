@@ -10,11 +10,12 @@ namespace TinyUSDGen
 {
     public static class Helpers
     {
-        public static List<string> TypedefList;
+        public static List<string> NondefineStructs = new();
 
         private static readonly Dictionary<string, string> s_csNameMappings = new Dictionary<string, string>()
         {
             { "uint8_t", "byte" },
+            { "c_tinyusd_half_t", "ushort" },
             { "uint16_t", "ushort" },
             { "uint32_t", "uint" },
             { "uint64_t", "ulong" },
@@ -51,7 +52,8 @@ namespace TinyUSDGen
 
             if (type is CppTypedef typedef)
             {
-                var typeDefCsName = typedef.Name;
+                var originalName = typedef.Name;
+                s_csNameMappings.TryGetValue(originalName, out string typeDefCsName);
                 if (isPointer)
                     return typeDefCsName + "*";
 
@@ -134,7 +136,8 @@ namespace TinyUSDGen
 
             if (type is CppTypedef typedef)
             {
-                var typeDefCsName = typedef.Name;
+                var originalName = typedef.Name;
+                s_csNameMappings.TryGetValue(originalName, out string typeDefCsName);
                 if (isPointer)
                     return typeDefCsName + "*";
 
@@ -144,8 +147,14 @@ namespace TinyUSDGen
             if (type is CppClass @class)
             {
                 var className = @class.Name;
+
                 if (isPointer)
-                    return className + "*";
+                    className += "*";
+
+                if (NondefineStructs.Contains(@class.Name))
+                {
+                    className = "IntPtr";
+                }
 
                 return className;
             }

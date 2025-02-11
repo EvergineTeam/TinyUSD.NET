@@ -19,9 +19,9 @@ namespace TinyUSDGen
 
         public void Generate(CppCompilation compilation, string outputPath)
         {
-            Helpers.TypedefList = compilation.Typedefs
-                    .Where(t => t.TypeKind == CppTypeKind.Typedef)
-                    .Select(t => t.Name).ToList();
+            ////Helpers.TypedefList = compilation.Typedefs
+            ////        .Where(t => t.TypeKind == CppTypeKind.Typedef)
+            ////        .ToDictionary(t => t.Name, t => (t.ElementType as CppAst.CppTypedef)?.Name);
 
             GenerateEnums(compilation, outputPath);
             GenerateStructs(compilation, outputPath);
@@ -36,7 +36,7 @@ namespace TinyUSDGen
             using (StreamWriter file = File.CreateText(Path.Combine(outputPath, "Enums.cs")))
             {
                 file.WriteLine("using System;\n");
-                file.WriteLine("namespace Evergine.Bindings.RenderDoc");
+                file.WriteLine("namespace Evergine.Bindings.TinyUSD");
                 file.WriteLine("{");
 
                 foreach (var cppEnum in compilation.Enums)
@@ -62,6 +62,8 @@ namespace TinyUSDGen
         {
             Debug.WriteLine("Generating Delegates...");
 
+            Helpers.NondefineStructs = compilation.Classes.Where(c => c.ClassKind == CppClassKind.Struct && c.IsDefinition == false).Select(c => c.Name).ToList();
+
             var delegates = compilation.Typedefs
                 .Where(t => t.TypeKind == CppTypeKind.Typedef
                        && t.ElementType is CppPointerType
@@ -72,7 +74,7 @@ namespace TinyUSDGen
             {
                 file.WriteLine("using System;");
                 file.WriteLine("using System.Runtime.InteropServices;\n");
-                file.WriteLine("namespace Evergine.Bindings.RenderDoc");
+                file.WriteLine("namespace Evergine.Bindings.TinyUSD");
                 file.WriteLine("{");
 
                 foreach (var funcPointer in delegates)
@@ -80,8 +82,6 @@ namespace TinyUSDGen
                     Helpers.PrintComments(file, funcPointer.Comment, "\t");
                     CppFunctionType pointerType = ((CppPointerType)funcPointer.ElementType).ElementType as CppFunctionType;
 
-                    ////var returnType = Helpers.ConvertToCSharpType(pointerType.ReturnType);
-                    ////returnType = Helpers.ShowAsMarshalType(returnType, Helpers.Family.ret);
                     file.Write($"\tpublic unsafe delegate {pointerType.ReturnType} {funcPointer.Name}(");
 
                     if (pointerType.Parameters.Count > 0)
@@ -94,9 +94,9 @@ namespace TinyUSDGen
                                 file.Write(",\n");
 
                             var parameter = pointerType.Parameters[i];
-                            ////var convertedType = Helpers.ConvertToCSharpType(parameter.Type);
-                            ////convertedType = Helpers.ShowAsMarshalType(convertedType, Helpers.Family.param);
-                            file.Write($"\t\t {parameter.Type} {parameter.Name}");
+                            string type = Helpers.ConvertToCSharpType(parameter.Type);
+                            type = Helpers.ShowAsMarshalType(type, Helpers.Family.field);
+                            file.Write($"\t\t {type} {parameter.Name}");
                         }
                     }
 
@@ -115,7 +115,7 @@ namespace TinyUSDGen
             {
                 file.WriteLine("using System;");
                 file.WriteLine("using System.Runtime.InteropServices;\n");
-                file.WriteLine("namespace Evergine.Bindings.RenderDoc");
+                file.WriteLine("namespace Evergine.Bindings.TinyUSD");
                 file.WriteLine("{");
 
                 var structs = compilation.Classes.Where(c => c.ClassKind == CppClassKind.Struct && c.IsDefinition == true);
@@ -131,7 +131,21 @@ namespace TinyUSDGen
                         Helpers.PrintComments(file, member.Comment, "\t\t", true);
                         string type = Helpers.ConvertToCSharpType(member.Type);
                         type = Helpers.ShowAsMarshalType(type, Helpers.Family.field);
-                        file.WriteLine($"\t\tpublic {type} {member.Name};");
+
+                        // Check if this is an array
+                        if (member.Type is CppArrayType)
+                        {
+                            int count = (member.Type as CppAst.CppArrayType).Size;
+                            for (int i = 0; i < count; i++)
+                            {
+                                file.WriteLine($"\t\tpublic {type} {member.Name}{i};");
+                            }
+                        }
+                        else // default case
+                        {
+                            
+                            file.WriteLine($"\t\tpublic {type} {member.Name};");
+                        }
                     }
 
                     file.WriteLine("\t}\n");
@@ -157,17 +171,17 @@ namespace TinyUSDGen
                 {
                     Helpers.PrintComments(file, cppFunction.Comment, "\t\t");
                     file.WriteLine($"\t\t[DllImport(\"c-tinyusd\", CallingConvention = CallingConvention.Cdecl)]");
-                    ////string returnType = Helpers.ConvertToCSharpType(cppFunction.ReturnType);
-                    ////returnType = Helpers.ShowAsMarshalType(returnType, Helpers.Family.ret);
-                    file.Write($"\t\tpublic static extern {cppFunction.ReturnType} {cppFunction.Name}(");
+                    string returnType = Helpers.ConvertToCSharpType(cppFunction.ReturnType);
+                    returnType = Helpers.ShowAsMarshalType(returnType, Helpers.Family.ret);
+                    file.Write($"\t\tpublic static extern {returnType} {cppFunction.Name}(");
                     foreach (var parameter in cppFunction.Parameters)
                     {
                         if(parameter != cppFunction.Parameters.First())
                             file.Write(", ");
 
-                        ////var convertedType = Helpers.ConvertToCSharpType(parameter.Type);
-                        ////convertedType = Helpers.ShowAsMarshalType(convertedType, Helpers.Family.param);
-                        file.Write($"{parameter.Type} {parameter.Name}");
+                        var convertedType = Helpers.ConvertToCSharpType(parameter.Type);
+                        convertedType = Helpers.ShowAsMarshalType(convertedType, Helpers.Family.param);
+                        file.Write($"{convertedType} {parameter.Name}");
                     }
                     file.WriteLine(");\n");
                 }

@@ -1,0 +1,135 @@
+using System;
+
+namespace Evergine.Bindings.TinyUSD
+{
+	public enum CTinyUSDFormat
+	{
+		C_TINYUSD_FORMAT_UNKNOWN = 0,
+
+		/// <summary>
+		/// auto detect based on file extension.
+		/// </summary>
+		C_TINYUSD_FORMAT_AUTO = 1,
+		C_TINYUSD_FORMAT_USDA = 2,
+		C_TINYUSD_FORMAT_USDC = 3,
+		C_TINYUSD_FORMAT_USDZ = 4,
+	}
+
+	public enum CTinyUSDAxis
+	{
+		C_TINYUSD_AXIS_UNKNOWN = 0,
+		C_TINYUSD_AXIS_X = 1,
+		C_TINYUSD_AXIS_Y = 2,
+		C_TINYUSD_AXIS_Z = 3,
+	}
+
+	/// <summary>
+	/// NOTE: Use dedicated enum value for token[] and string[]
+	/// (therse use C struct `c_tinyusd_token_vector` and `c_tinyusd_string_vector`
+	/// respectively)
+	/// Use C_TINYUSD_VALUE_1D_BIT for other numerical value type to represent 1D
+	/// array.
+	/// </summary>
+	public enum CTinyUSDValueType
+	{
+		C_TINYUSD_VALUE_UNKNOWN = 0,
+		C_TINYUSD_VALUE_TOKEN = 1,
+
+		/// <summary>
+		/// token[] 
+		/// </summary>
+		C_TINYUSD_VALUE_TOKEN_VECTOR = 2,
+		C_TINYUSD_VALUE_STRING = 3,
+
+		/// <summary>
+		/// string[] 
+		/// </summary>
+		C_TINYUSD_VALUE_STRING_VECTOR = 4,
+		C_TINYUSD_VALUE_BOOL = 5,
+		C_TINYUSD_VALUE_HALF = 6,
+		C_TINYUSD_VALUE_HALF2 = 7,
+		C_TINYUSD_VALUE_HALF3 = 8,
+		C_TINYUSD_VALUE_HALF4 = 9,
+		C_TINYUSD_VALUE_INT = 10,
+		C_TINYUSD_VALUE_INT2 = 11,
+		C_TINYUSD_VALUE_INT3 = 12,
+		C_TINYUSD_VALUE_INT4 = 13,
+		C_TINYUSD_VALUE_UINT = 14,
+		C_TINYUSD_VALUE_UINT2 = 15,
+		C_TINYUSD_VALUE_UINT3 = 16,
+		C_TINYUSD_VALUE_UINT4 = 17,
+		C_TINYUSD_VALUE_INT64 = 18,
+		C_TINYUSD_VALUE_UINT64 = 19,
+		C_TINYUSD_VALUE_FLOAT = 20,
+		C_TINYUSD_VALUE_FLOAT2 = 21,
+		C_TINYUSD_VALUE_FLOAT3 = 22,
+		C_TINYUSD_VALUE_FLOAT4 = 23,
+		C_TINYUSD_VALUE_DOUBLE = 24,
+		C_TINYUSD_VALUE_DOUBLE2 = 25,
+		C_TINYUSD_VALUE_DOUBLE3 = 26,
+		C_TINYUSD_VALUE_DOUBLE4 = 27,
+		C_TINYUSD_VALUE_QUATH = 28,
+		C_TINYUSD_VALUE_QUATF = 29,
+		C_TINYUSD_VALUE_QUATD = 30,
+		C_TINYUSD_VALUE_COLOR3H = 31,
+		C_TINYUSD_VALUE_COLOR3F = 32,
+		C_TINYUSD_VALUE_COLOR3D = 33,
+		C_TINYUSD_VALUE_COLOR4H = 34,
+		C_TINYUSD_VALUE_COLOR4F = 35,
+		C_TINYUSD_VALUE_COLOR4D = 36,
+		C_TINYUSD_VALUE_TEXCOORD2H = 37,
+		C_TINYUSD_VALUE_TEXCOORD2F = 38,
+		C_TINYUSD_VALUE_TEXCOORD2D = 39,
+		C_TINYUSD_VALUE_TEXCOORD3H = 40,
+		C_TINYUSD_VALUE_TEXCOORD3F = 41,
+		C_TINYUSD_VALUE_TEXCOORD3D = 42,
+		C_TINYUSD_VALUE_NORMAL3H = 43,
+		C_TINYUSD_VALUE_NORMAL3F = 44,
+		C_TINYUSD_VALUE_NORMAL3D = 45,
+		C_TINYUSD_VALUE_VECTOR3H = 46,
+		C_TINYUSD_VALUE_VECTOR3F = 47,
+		C_TINYUSD_VALUE_VECTOR3D = 48,
+		C_TINYUSD_VALUE_POINT3H = 49,
+		C_TINYUSD_VALUE_POINT3F = 50,
+		C_TINYUSD_VALUE_POINT3D = 51,
+		C_TINYUSD_VALUE_MATRIX2D = 52,
+		C_TINYUSD_VALUE_MATRIX3D = 53,
+		C_TINYUSD_VALUE_MATRIX4D = 54,
+		C_TINYUSD_VALUE_FRAME4D = 55,
+
+		/// <summary>
+		/// tinyusdz::value::CustomData. VtDictionary equivalent in pxrUSD 
+		/// </summary>
+		C_TINYUSD_VALUE_DICTIONARY = 56,
+
+		/// <summary>
+		/// terminator 
+		/// </summary>
+		C_TINYUSD_VALUE_END = 57,
+	}
+
+	/// <summary>
+	/// NOTE: No `Geom` prefix to usdGeom prims in C API. 
+	/// </summary>
+	public enum CTinyUSDPrimType
+	{
+		C_TINYUSD_PRIM_UNKNOWN = 0,
+		C_TINYUSD_PRIM_MODEL = 1,
+		C_TINYUSD_PRIM_SCOPE = 2,
+		C_TINYUSD_PRIM_XFORM = 3,
+		C_TINYUSD_PRIM_MESH = 4,
+		C_TINYUSD_PRIM_GEOMSUBSET = 5,
+		C_TINYUSD_PRIM_MATERIAL = 6,
+		C_TINYUSD_PRIM_SHADER = 7,
+		C_TINYUSD_PRIM_CAMERA = 8,
+		C_TINYUSD_PRIM_SPHERE_LIGHT = 9,
+		C_TINYUSD_PRIM_DISTANT_LIGHT = 10,
+		C_TINYUSD_PRIM_RECT_LIGHT = 11,
+
+		/// <summary>
+		/// TODO: Add more prim types... 
+		/// </summary>
+		C_TINYUSD_PRIM_END = 12,
+	}
+
+}
