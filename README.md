@@ -20,6 +20,22 @@ The binding allows developers to interact with USD files in C# using the **tinyu
 - Scene graph manipulation
 - Exporting and importing assets
 
+## How to compile tinyusdz native libraries
+### Requirements:
+- [tinyusdz GitHub repository](https://github.com/lighttransport/tinyusdz).
+- CMake version 3.31 and higher
+- Visual Studio 17 2022
+
+### Steps:
+1️⃣ Step: clone the [tinyusdz GitHub repository](https://github.com/lighttransport/tinyusdz).
+
+2️⃣ Step: Run cmake with the following options enabled.
+
+![image](https://github.com/user-attachments/assets/b99df589-0220-4e3a-86fb-5787958c4d47)
+
+3️⃣ Step: In the generated C++ solution, compile the ctinyusd project to generate the dll file.
+
+
 ## Test
 
 Check the `TinyUSDExample` console project to run the example shown in the image.
