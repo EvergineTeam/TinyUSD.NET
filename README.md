@@ -22,9 +22,10 @@ The binding allows developers to interact with USD files in C# using the **tinyu
 
 ## Test
 
-Check at `Generator\Test` an Evergine project created with the default template which uses the bindings.
+Check the `TinyUSDExample` console project to run the example shown in the image.
 
-![capture4](https://user-images.githubusercontent.com/1783366/177344683-a5d7a2c0-7afa-4cb5-ab15-cc54c9dcc24c.png)
+![image](https://github.com/user-attachments/assets/9ae576c9-07e8-4373-92be-a4f23c27d6be)
+
 
 ## Platforms
 We are working to add support to all this plaforms:
