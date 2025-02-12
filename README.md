@@ -26,6 +26,11 @@ The binding allows developers to interact with USD files in C# using the **tinyu
 - CMake version 3.31 and higher
 - Visual Studio 17 2022
 
+### Locations of the necessary resources:
+- c-tinyusd.h: tinyusd (root folder) / src
+- tinyusdz.sln x64: tinyusd (root folder) / build
+- tinyusdz.sln Win32: tinyusd (root folder) / build_win32
+
 ### Steps:
 1️⃣ Step: clone the [tinyusdz GitHub repository](https://github.com/lighttransport/tinyusdz).
 
@@ -35,6 +40,9 @@ The binding allows developers to interact with USD files in C# using the **tinyu
 
 3️⃣ Step: In the generated C++ solution, compile the ctinyusd project to generate the dll file.
 
+By default, the x64 solution will be generated in the “build” folder specified in cmake.
+
+To generate the Win32 solution we must execute the file vc-setup-32bit.bat. It will generate the Win32 solution in the build_win32 folder.
 
 ## Test
 
