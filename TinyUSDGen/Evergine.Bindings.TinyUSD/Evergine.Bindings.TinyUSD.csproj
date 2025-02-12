@@ -6,7 +6,7 @@
 	  <Authors>Evergine Team</Authors>
 	  <Company>Plain Concepts</Company>
 	  <Description>Provides csharp bindings to tinyUSD library.</Description>
-	  <RepositoryUrl>https://github.com/EvergineTeam/ImGui.Net</RepositoryUrl>
+	  <RepositoryUrl>https://github.com/EvergineTeam/TinyUSD.NET</RepositoryUrl>
 	  <PackageIcon>icon.png</PackageIcon>
 	  <PackageReadmeFile>README.md</PackageReadmeFile>
 	  <Platforms>AnyCPU;x86;x64</Platforms>

@@ -6,7 +6,7 @@ tinyusdz is a lightweight, single-header C++ library for handling USD (Universal
 ## Build Status
 [![CI](https://github.com/EvergineTeam/TinyUSD.NET/actions/workflows/CI.yml/badge.svg)](https://github.com/EvergineTeam/TinyUSD.NET/actions/workflows/CI.yml)
 [![CD](https://github.com/EvergineTeam/TinyUSD.NET/actions/workflows/CD.yml/badge.svg)](https://github.com/EvergineTeam/TinyUSD.NET/actions/workflows/CD.yml)
-[![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.Imgui?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.Imgui)
+[![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.TinyUSD?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.TinyUSD)
 
 ## How it works
 
@@ -20,11 +20,36 @@ The binding allows developers to interact with USD files in C# using the **tinyu
 - Scene graph manipulation
 - Exporting and importing assets
 
+## How to compile tinyusdz native libraries
+### Requirements:
+- [tinyusdz GitHub repository](https://github.com/lighttransport/tinyusdz).
+- CMake version 3.31 and higher
+- Visual Studio 17 2022
+
+### Locations of the necessary resources:
+- c-tinyusd.h: tinyusd (root folder) / src
+- tinyusdz.sln x64: tinyusd (root folder) / build
+- tinyusdz.sln Win32: tinyusd (root folder) / build_win32
+
+### Steps:
+1️⃣ Step: clone the [tinyusdz GitHub repository](https://github.com/lighttransport/tinyusdz).
+
+2️⃣ Step: Run cmake with the following options enabled.
+
+![CMake project configuration](https://github.com/EvergineTeam/TinyUSD.NET/blob/main/readmeCMake.png)
+
+3️⃣ Step: In the generated C++ solution, compile the ctinyusd project to generate the dll file.
+
+By default, the x64 solution will be generated in the “build” folder specified in cmake.
+
+To generate the Win32 solution we must execute the file vc-setup-32bit.bat. It will generate the Win32 solution in the build_win32 folder.
+
 ## Test
 
-Check at `Generator\Test` an Evergine project created with the default template which uses the bindings.
+Check the `TinyUSDExample` console project to run the example shown in the image.
 
-![capture4](https://user-images.githubusercontent.com/1783366/177344683-a5d7a2c0-7afa-4cb5-ab15-cc54c9dcc24c.png)
+![Output](https://github.com/EvergineTeam/TinyUSD.NET/blob/main/readmeExample.png)
+
 
 ## Platforms
 We are working to add support to all this plaforms:
