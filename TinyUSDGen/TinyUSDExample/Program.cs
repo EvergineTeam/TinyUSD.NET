@@ -1,6 +1,19 @@
 ﻿using Evergine.Bindings.TinyUSD;
 
-string path = "../../../resources/output.usda";
+string currentDir = Directory.GetCurrentDirectory();
+
+while (!Directory.GetFiles(currentDir, "*.csproj").Any())
+{
+    currentDir = Directory.GetParent(currentDir)?.FullName;
+
+    if (currentDir == null)
+    {
+        throw new Exception("No se encontró el archivo .csproj en el árbol de directorios.");
+    }
+}
+
+string path = Path.Combine(currentDir, "resources", "output.usda");
+
 IntPtr stage = TinyUSDNative.c_tinyusd_stage_new();
 IntPtr warn = TinyUSDNative.c_tinyusd_string_new_empty();
 IntPtr err = TinyUSDNative.c_tinyusd_string_new_empty();
