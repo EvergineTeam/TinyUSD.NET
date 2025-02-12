@@ -6,7 +6,7 @@ tinyusdz is a lightweight, single-header C++ library for handling USD (Universal
 ## Build Status
 [![CI](https://github.com/EvergineTeam/TinyUSD.NET/actions/workflows/CI.yml/badge.svg)](https://github.com/EvergineTeam/TinyUSD.NET/actions/workflows/CI.yml)
 [![CD](https://github.com/EvergineTeam/TinyUSD.NET/actions/workflows/CD.yml/badge.svg)](https://github.com/EvergineTeam/TinyUSD.NET/actions/workflows/CD.yml)
-[![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.Imgui?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.Imgui)
+[![Nuget](https://img.shields.io/nuget/v/Evergine.Bindings.TinyUSD?logo=nuget)](https://www.nuget.org/packages/Evergine.Bindings.TinyUSD)
 
 ## How it works
 
