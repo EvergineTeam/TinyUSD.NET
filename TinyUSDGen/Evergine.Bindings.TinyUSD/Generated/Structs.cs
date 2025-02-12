@@ -130,71 +130,39 @@ namespace Evergine.Bindings.TinyUSD
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct c_tinyusd_matrix2d_t
 	{
-		public double m0;
-		public double m1;
-		public double m2;
-		public double m3;
+		public fixed double m[4];
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct c_tinyusd_matrix3d_t
 	{
-		public double m0;
-		public double m1;
-		public double m2;
-		public double m3;
-		public double m4;
-		public double m5;
-		public double m6;
-		public double m7;
-		public double m8;
+		public fixed double m[9];
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct c_tinyusd_matrix4d_t
 	{
-		public double m0;
-		public double m1;
-		public double m2;
-		public double m3;
-		public double m4;
-		public double m5;
-		public double m6;
-		public double m7;
-		public double m8;
-		public double m9;
-		public double m10;
-		public double m11;
-		public double m12;
-		public double m13;
-		public double m14;
-		public double m15;
+		public fixed double m[16];
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct c_tinyusd_quath_t
 	{
-		public ushort imag0;
-		public ushort imag1;
-		public ushort imag2;
+		public fixed ushort imag[3];
 		public ushort real;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct c_tinyusd_quatf_t
 	{
-		public float imag0;
-		public float imag1;
-		public float imag2;
+		public fixed float imag[3];
 		public float real;
 	}
 
 	[StructLayout(LayoutKind.Sequential)]
 	public unsafe struct c_tinyusd_quatd_t
 	{
-		public double imag0;
-		public double imag1;
-		public double imag2;
+		public fixed double imag[3];
 		public double real;
 	}
 

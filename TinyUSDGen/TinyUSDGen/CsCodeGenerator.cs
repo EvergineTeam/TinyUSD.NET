@@ -139,10 +139,7 @@ namespace TinyUSDGen
                         if (member.Type is CppArrayType)
                         {
                             int count = (member.Type as CppAst.CppArrayType).Size;
-                            for (int i = 0; i < count; i++)
-                            {
-                                file.WriteLine($"\t\tpublic {type} {member.Name}{i};");
-                            }
+                            file.WriteLine($"\t\tpublic fixed {type} {member.Name}[{count}];");
                         }
                         else // default case
                         {
