@@ -1,0 +1,21 @@
+#usda 1.0
+
+def Xform "root"
+{
+    double3 xformOp:translate = (1.0, 2.0, 3.0)
+    uniform token[] xformOpOrder = ["xformOp:translate"]
+
+    def Mesh "quad"
+    {
+        point3f[] points = [(0, 0, 0), (1, 0, 0), (1, 1, 0), (0, 1, 0)]
+        int[] faceVertexIndices = [0, 1, 2, 0, 2, 3]
+        int[] faceVertexCounts = [3, 3]
+        custom uniform double myvalue = 3.0 (
+            hidden = false
+        )
+        texCoord2f[] primvars:uv = [(0, 0), (1, 0), (1, 1), (0, 1)] (
+            interpolation = "vertex"
+        )
+        int[] primvars:uv:indices = [0, 1, 2, 3]
+    }
+}
