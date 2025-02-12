@@ -36,7 +36,7 @@ The binding allows developers to interact with USD files in C# using the **tinyu
 
 2️⃣ Step: Run cmake with the following options enabled.
 
-![image](https://github.com/user-attachments/assets/b99df589-0220-4e3a-86fb-5787958c4d47)
+![CMake project configuration](https://github.com/EvergineTeam/TinyUSD.NET/blob/main/readmeCMake.png)
 
 3️⃣ Step: In the generated C++ solution, compile the ctinyusd project to generate the dll file.
 
@@ -48,7 +48,7 @@ To generate the Win32 solution we must execute the file vc-setup-32bit.bat. It w
 
 Check the `TinyUSDExample` console project to run the example shown in the image.
 
-![image](https://github.com/user-attachments/assets/9ae576c9-07e8-4373-92be-a4f23c27d6be)
+![Output](https://github.com/EvergineTeam/TinyUSD.NET/blob/main/readmeExample.png)
 
 
 ## Platforms
