@@ -11,5 +11,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Evergine.Bindings.TinyUSD\Evergine.Bindings.TinyUSD.csproj" />
   </ItemGroup>
-
+	
+	<ItemGroup>
+		<Content Include="..\Evergine.Bindings.TinyUSD\runtimes\win-x64\native\c-tinyusd.dll" Visible="false" CopyToOutputDirectory="PreserveNewest" />
+	</ItemGroup>
 </Project>
